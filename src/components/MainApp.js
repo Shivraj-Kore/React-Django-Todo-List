@@ -3,7 +3,6 @@ import React from "react";
 function MainApp() {
     return (
         <>
-<<<<<<< Updated upstream
             <div className="min-h-screen flex items-center justify-center ">
                 <div className="bg-white bg-opacity-80 p-8 rounded shadow-lg">
                     <form className="mb-8">
@@ -15,26 +14,6 @@ function MainApp() {
                                     type="text"
                                     placeholder="Add Task"
                                 />
-=======
-            <div className="container" style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                zIndex: 1,
-                width: '100%',
-                height: '100%',
-            }}  >
-                <div id="task-container">
-                    <div id="form-wrapper">
-                        <form id="form">
-                            <div className="flex-wrapper">
-                                <div style={flexstyle}>
-                                    <input className="form-control" id="title" type="text" placeholder="Add Task"/>
-                                </div>
-                                <div style={flexstyle2}>
-                                    <input className="btn btn-warning" type="submit" name="Add" id="submit" />
-                                </div>
->>>>>>> Stashed changes
                             </div>
                             <div className="w-1/4">
                                 <button
