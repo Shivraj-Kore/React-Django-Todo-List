@@ -3,13 +3,10 @@ import MainApp from './components/MainApp';
 import './App.css'
 const App = () => {
   return (
-    <div>
-      <ParticleBG />
-      <MainApp />
-
-
-
-    </div >
+    <>
+    <ParticleBG/>
+    <MainApp/>
+    </>
   );
 };
 

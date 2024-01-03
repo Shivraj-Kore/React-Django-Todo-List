@@ -22,14 +22,6 @@ const ParticleBG = () => {
         >
             <Particles
                 id="tsparticles"
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    zIndex: -1,
-                    width: '100%',
-                    height: '100%',
-                }}
                 init={particlesInit}
                 loaded={particlesLoaded}
                 options={{
@@ -42,11 +34,11 @@ const ParticleBG = () => {
                     interactivity: {
                         events: {
                             onClick: {
-                                enable: true,
+                                enable: false,
                                 mode: "push",
                             },
                             onHover: {
-                                enable: true,
+                                enable: false,
                                 mode: "repulse",
                             },
                             resize: true,
@@ -63,11 +55,11 @@ const ParticleBG = () => {
                     },
                     particles: {
                         color: {
-                            value: "#00000",
+                            value: "#999999",
                         },
                         links: {
-                            color: "#ffffff",
-                            distance: 150,
+                            color: "#1ecbe1",
+                            distance: 50,
                             enable: true,
                             opacity: 0.5,
                             width: 1,
@@ -79,24 +71,27 @@ const ParticleBG = () => {
                                 default: "bounce",
                             },
                             random: false,
-                            speed: 6,
+                            speed: 3,
                             straight: false,
                         },
                         number: {
                             density: {
-                                enable: true,
+                                enable: false,
                                 area: 800,
                             },
-                            value: 80,
+                            value: 50,
                         },
                         opacity: {
                             value: 0.5,
                         },
                         shape: {
                             type: "circle",
+                            polygon: {
+                            nb_sides: 6,
+                        },
                         },
                         size: {
-                            value: { min: 1, max: 5 },
+                            value: { min: 1, max: 6 },
                         },
                     },
                     detectRetina: true,
