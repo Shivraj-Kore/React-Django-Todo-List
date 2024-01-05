@@ -59,10 +59,17 @@ def taskDelete(request , pk):
     return Response("Item deleted")
 
 @api_view(['POST'])
-def taskStatus(request , pk):
-    task = Task.objects.get(id = pk)
-    task.status = not(task.status)
+def taskStatus(request, pk):
+    try:
+        task = Task.objects.get(id=pk)
+    except Task.DoesNotExist:
+        return Response({'error': 'Task not found'}, status=404)
+
+    # Toggle the status
+    task.status = not task.status
     task.save()
-    serializer = TaskSerializer(instance=task , data=request.data)
-    
+
+    # You can use the serializer to get the updated data, but it's not necessary for saving changes
+    serializer = TaskSerializer(instance=task)
+
     return Response(serializer.data)

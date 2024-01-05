@@ -4,6 +4,7 @@ function MainApp() {
     let [list, setList] = useState([]);
     let [newTask, setThisTask] = useState('');
 
+
     const getTaskList = async () => {
         try {
             let tasklist = await fetch("http://localhost:8000/task-list");
@@ -21,7 +22,7 @@ function MainApp() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         const newTaskData = {
             title: newTask,
             status: false
@@ -38,7 +39,7 @@ function MainApp() {
 
             const responseData = await response.json();
             console.log(responseData);
-            
+
             // Update the task list after adding a new task
             getTaskList();
         } catch (error) {
@@ -50,7 +51,6 @@ function MainApp() {
     }
 
     const handleUpdate = async (id) => {
-        
         const newTaskData = {
             title: newTask,
             status: false
@@ -67,8 +67,8 @@ function MainApp() {
 
             const responseData = await response.json();
             console.log(responseData);
-            
-            // Update the task list after adding a new task
+
+            // Update the task list after updating a task
             getTaskList();
         } catch (error) {
             console.error('Error:', error);
@@ -94,12 +94,7 @@ function MainApp() {
         }
     }
 
-    useEffect(() => {
-        getTaskList();
-    }, []);
-
     const handleStatusCheck = async (id) => {
-
         try {
             const response = await fetch(`http://localhost:8000/task-status/${id}`, {
                 method: 'POST',
@@ -111,9 +106,10 @@ function MainApp() {
 
             const responseData = await response.json();
             console.log(responseData);
-            
-            // Update the task list after adding a new task
+
+            // Update the task list after checking the status
             getTaskList();
+            console.log(getTaskList)
         } catch (error) {
             console.error('Error:', error);
         }
@@ -121,13 +117,16 @@ function MainApp() {
         // Clear the input field after submitting
         setThisTask('');
     }
-    
 
+    useEffect(() => {
+        getTaskList();
+    }, []);
 
     return (
         <>
-        
             <div className="m-[10rem]">
+                <h4 className='text-white text-center text-xl'>TO-DO LIST</h4>
+
                 <div className="bg-white bg-opacity-80 p-8 rounded shadow-lg">
                     <form className="mb-8" onSubmit={handleSubmit}>
                         <div className="flex items-center">
@@ -153,40 +152,36 @@ function MainApp() {
                     </form>
 
                     <div>
-                    <div>
-
-                        {list.map((item, index) => (
-                            <div className='flex '>
-                                <div className="w-full py-2 px-4 border border-gray-300 rounded mb-2">
-                                    <h1 key={index}>
-                                    {item.title}
-                                    </h1>
+                        <div>
+                            {list.map((item, index) => (
+                                <div className='flex ' key={index}>
+                                    <div className={`w-full py-2 px-4 border border-gray-300 rounded mb-2 ${item.status ? 'line-through text-gray-500' : ''}`}>
+                                        <h1>{item.title}</h1>
+                                    </div>
+                                    <button
+                                        className="bg-green-500 py-2 px-4 rounded text-white ml-2 mb-2"
+                                        type="button"
+                                        onClick={() => handleUpdate(item.id)}
+                                    >
+                                        Update
+                                    </button>
+                                    <button
+                                        className="bg-red-500 py-2 px-4 rounded text-white ml-2 mb-2"
+                                        type="button"
+                                        onClick={() => handleDelete(item.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        className={`py-2 px-4 rounded ml-2 mb-2 ${item.status ? 'bg-gray-500 text-white' : 'bg-gray-500 text-white'}`}
+                                        type="button"
+                                        onClick={() => handleStatusCheck(item.id)}
+                                    >
+                                        Completed
+                                    </button>
                                 </div>
-                                <button
-                                    className="bg-green-500 py-2 px-4 rounded text-white ml-2 mb-2"
-                                    type="button"
-                                    onClick={() => handleUpdate(item.id)}
-                                >
-                                    Update
-                                </button>
-                                <button
-                                    className="bg-red-500 py-2 px-4 rounded text-white ml-2 mb-2"
-                                    type="button"
-                                    onClick={() => handleDelete(item.id)}
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    className="bg-gray-500 py-2 px-4 rounded text-white ml-2 mb-2"
-                                    type="button"
-                                    onClick={() => handleStatusCheck(item.id)}
-                                >
-                                    Status
-                                </button>
-                            </div>
-                        ))}
-
-                    </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
