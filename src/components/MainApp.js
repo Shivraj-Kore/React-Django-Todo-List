@@ -125,6 +125,8 @@ function MainApp() {
     return (
         <>
             <div className="m-[10rem]">
+                <h4 className='text-white text-center text-xl'>TO-DO LIST</h4>
+
                 <div className="bg-white bg-opacity-80 p-8 rounded shadow-lg">
                     <form className="mb-8" onSubmit={handleSubmit}>
                         <div className="flex items-center">
